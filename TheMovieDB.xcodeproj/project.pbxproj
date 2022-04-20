@@ -18,6 +18,7 @@
 		722D8A47280E36F4001BE55E /* MovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 722D8A45280E36F4001BE55E /* MovieTableViewCell.xib */; };
 		722D8A49280E393E001BE55E /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D8A48280E393E001BE55E /* Movie.swift */; };
 		722D8A4B280E3C06001BE55E /* ResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D8A4A280E3C06001BE55E /* ResponseModels.swift */; };
+		722D8A4D280F8357001BE55E /* MovieController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D8A4C280F8357001BE55E /* MovieController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		722D8A45280E36F4001BE55E /* MovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieTableViewCell.xib; sourceTree = "<group>"; };
 		722D8A48280E393E001BE55E /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		722D8A4A280E3C06001BE55E /* ResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModels.swift; sourceTree = "<group>"; };
+		722D8A4C280F8357001BE55E /* MovieController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			children = (
 				722D8A48280E393E001BE55E /* Movie.swift */,
 				722D8A4A280E3C06001BE55E /* ResponseModels.swift */,
+				722D8A4C280F8357001BE55E /* MovieController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				722D8A43280E3537001BE55E /* MovieDetailViewController.swift in Sources */,
 				722D8A49280E393E001BE55E /* Movie.swift in Sources */,
 				722D8A2A280E2AE4001BE55E /* AppDelegate.swift in Sources */,
+				722D8A4D280F8357001BE55E /* MovieController.swift in Sources */,
 				722D8A2C280E2AE4001BE55E /* SceneDelegate.swift in Sources */,
 				722D8A41280E350D001BE55E /* MovieTableViewController.swift in Sources */,
 				722D8A4B280E3C06001BE55E /* ResponseModels.swift in Sources */,
