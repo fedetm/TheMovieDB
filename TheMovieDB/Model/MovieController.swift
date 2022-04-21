@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class MovieController {
     
@@ -16,6 +17,7 @@ class MovieController {
     
     enum MovieControllerError: Error, LocalizedError {
         case moviesNotFound
+        case imageDataMissing
     }
     
     func fetchMovies() async throws -> [Movie] {
@@ -35,5 +37,23 @@ class MovieController {
         let movieResponse = try decoder.decode(MoviesResponse.self, from: data)
         
         return movieResponse.results
+    }
+    
+    func fetchImage(from filePath: String) async throws -> UIImage {
+        let baseImageURL = URL(string: "https://image.tmdb.org/t/p/w500/")!
+        
+        let imageURL = baseImageURL.appendingPathComponent(filePath)
+        
+        let (data, response) = try await URLSession.shared.data(from: imageURL)
+        
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw MovieControllerError.imageDataMissing
+        }
+        
+        guard let image = UIImage(data: data) else {
+            throw MovieControllerError.imageDataMissing
+        }
+        
+        return image
     }
 }

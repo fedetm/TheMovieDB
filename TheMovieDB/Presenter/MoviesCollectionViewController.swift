@@ -11,32 +11,39 @@ private let reuseIdentifier = "Cell"
 
 class MoviesCollectionViewController: UICollectionViewController {
     
-    //let movies = [Movie]()
+    var movies = [Movie]()
     
-    private let movies = [
-        "Alabama", "Alaska", "Arizona", "Arkansas", "California",
-        "Colorado", "Connecticut", "Delaware", "Florida",
-        "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
-        "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland",
-        "Massachusetts", "Michigan", "Minnesota", "Mississippi",
-        "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire",
-        "New Jersey", "New Mexico", "New York", "North Carolina",
-        "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania",
-        "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
-        "Texas", "Utah", "Vermont", "Virginia", "Washington",
-        "West Virginia", "Wisconsin", "Wyoming"
-    ]
+    var imageLoadTasks: [IndexPath: Task<Void, Never>] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
         
-        //collectionView.setCollectionViewLayout(generateLayout(), animated: false)
-        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        navigationController?.navigationBar.barTintColor = UIColor.black
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.red]
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.red]
         
-        // Do any additional setup after loading the view.
+        Task.init {
+            do {
+                let movies = try await MovieController.shared.fetchMovies()
+                updateUI(with: movies)
+            } catch {
+                displayError(error, title: "Failed to Fetch Movies")
+            }
+        }
+    }
+    
+    func updateUI(with movies: [Movie]) {
+        self.movies = movies
+        self.collectionView.reloadData()
+    }
+    
+    func displayError(_ error: Error, title: String) {
+        guard let _ = viewIfLoaded?.window else { return }
+        
+        let alert = UIAlertController(title: title, message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 
     /*
@@ -79,9 +86,36 @@ class MoviesCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCollectionViewCell
     
-        cell.label.text = movies[indexPath.item]
+        configure(cell, forItemAt: indexPath)
     
         return cell
+    }
+    
+    func configure(_ cell: MovieCollectionViewCell, forItemAt indexPath: IndexPath) {
+        let movie = movies[indexPath.item]
+        
+        cell.imageView.image = UIImage(systemName: "photo.on.rectangle")
+
+        imageLoadTasks[indexPath] = Task.init {
+            if let image = try? await MovieController.shared.fetchImage(from: movie.imagePath) {
+                if let currentIndexPath = self.collectionView.indexPath(for: cell), currentIndexPath == indexPath {
+                    cell.imageView.image = image
+                }
+            }
+            imageLoadTasks[indexPath] = nil
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        // Cancel the image fetching task if it's no longer needed
+        imageLoadTasks[indexPath]?.cancel()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        //Cancel image fetching tasks before all the tasks finish loading the images
+        imageLoadTasks.forEach { key, value in value.cancel() }
     }
 
     // MARK: UICollectionViewDelegate

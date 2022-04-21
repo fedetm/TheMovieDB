@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,7 +24,7 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.023823427040000001" green="0.14487499000000001" blue="0.25445076820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="fCk-cW-aDg" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="P9c-Gu-8w7"/>
                             <constraint firstItem="fCk-cW-aDg" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="b5X-ck-FEl"/>
@@ -39,8 +38,5 @@
     </scenes>
     <resources>
         <image name="TheMovieDB" width="400" height="400"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

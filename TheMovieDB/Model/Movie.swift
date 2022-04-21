@@ -10,13 +10,13 @@ import Foundation
 struct Movie: Codable {
     var id: Int
     var detailText: String
-    var imageURL: URL
+    var imagePath: String
     var title: String
     
     enum CodingKeys: String, CodingKey {
         case id
         case detailText = "overview"
-        case imageURL = "poster_path"
+        case imagePath = "poster_path"
         case title
     }
 }
