@@ -27,7 +27,6 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         updateUI()
     }
     
@@ -35,6 +34,12 @@ class MovieDetailViewController: UIViewController {
         titleLabel.text = movie.title
         summaryLabel.text = "Summary"
         detailTextLabel.text = movie.detailText
+        
+        Task.init {
+            if let image = try? await MovieController.shared.fetchImage(from: movie.imagePath) {
+                imageView.image = image
+            }
+        }
     }
     
 
