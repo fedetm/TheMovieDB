@@ -9,10 +9,32 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
 
+    @IBOutlet var detailTextLabel: UILabel!
+    @IBOutlet var summaryLabel: UILabel!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var titleLabel: UILabel!
+    
+    let movie: Movie
+    
+    init?(coder: NSCoder, movie: Movie) {
+        self.movie = movie
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        updateUI()
+    }
+    
+    func updateUI() {
+        titleLabel.text = movie.title
+        summaryLabel.text = "Summary"
+        detailTextLabel.text = movie.detailText
     }
     
 

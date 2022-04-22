@@ -46,6 +46,16 @@ class MoviesCollectionViewController: UICollectionViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
+    @IBSegueAction func showMovieItem(_ coder: NSCoder, sender: Any?) -> MovieDetailViewController? {
+        
+        guard let cell = sender as? MovieCollectionViewCell, let indexPath = collectionView.indexPath(for: cell) else {
+            return nil
+        }
+        
+        let movie = movies[indexPath.item]
+        
+        return MovieDetailViewController(coder: coder, movie: movie)
+    }
     /*
     // MARK: - Navigation
 
