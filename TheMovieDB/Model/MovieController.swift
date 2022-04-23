@@ -40,7 +40,7 @@ class MovieController {
     }
     
     func fetchImage(from filePath: String) async throws -> UIImage {
-        let baseImageURL = URL(string: "https://image.tmdb.org/t/p/w500/")!
+        let baseImageURL = URL(string: "https://image.tmdb.org/t/p/original/")!
         
         let imageURL = baseImageURL.appendingPathComponent(filePath)
         

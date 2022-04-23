@@ -12,8 +12,8 @@ private let reuseIdentifier = "Cell"
 class MoviesCollectionViewController: UICollectionViewController {
     
     var movies = [Movie]()
-    
     var imageLoadTasks: [IndexPath: Task<Void, Never>] = [:]
+    var alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -15,6 +15,7 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet var titleLabel: UILabel!
     
     let movie: Movie
+    var alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
     
     init?(coder: NSCoder, movie: Movie) {
         self.movie = movie
