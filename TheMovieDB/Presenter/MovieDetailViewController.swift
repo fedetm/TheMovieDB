@@ -14,8 +14,10 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     
+    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     let movie: Movie
-    var alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
     
     init?(coder: NSCoder, movie: Movie) {
         self.movie = movie
@@ -31,15 +33,27 @@ class MovieDetailViewController: UIViewController {
         updateUI()
     }
     
+    private func showSpinner() {
+        activityIndicator.startAnimating()
+        loadingView.isHidden = false
+    }
+
+    private func hideSpinner() {
+        activityIndicator.stopAnimating()
+        loadingView.isHidden = true
+    }
+    
     func updateUI() {
         titleLabel.text = movie.title
         summaryLabel.text = "Summary"
         detailTextLabel.text = movie.detailText
         
         Task.init {
+            showSpinner()
             if let image = try? await MovieController.shared.fetchImage(from: movie.imagePath) {
                 imageView.image = image
             }
+            self.hideSpinner()
         }
     }
     

@@ -13,7 +13,9 @@ class MoviesCollectionViewController: UICollectionViewController {
     
     var movies = [Movie]()
     var imageLoadTasks: [IndexPath: Task<Void, Never>] = [:]
-    var alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+    
+    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +25,27 @@ class MoviesCollectionViewController: UICollectionViewController {
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.red]
         
         Task.init {
+            showSpinner()
             do {
                 let movies = try await MovieController.shared.fetchMovies()
                 updateUI(with: movies)
             } catch {
                 displayError(error, title: "Failed to Fetch Movies")
             }
+            self.hideSpinner()
         }
     }
+    
+    private func showSpinner() {
+        activityIndicator.startAnimating()
+        loadingView.isHidden = false
+    }
+
+    private func hideSpinner() {
+        activityIndicator.stopAnimating()
+        loadingView.isHidden = true
+    }
+
     
     func updateUI(with movies: [Movie]) {
         self.movies = movies
@@ -87,7 +102,6 @@ class MoviesCollectionViewController: UICollectionViewController {
         return 1
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return movies.count
@@ -123,7 +137,6 @@ class MoviesCollectionViewController: UICollectionViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
         //Cancel image fetching tasks before all the tasks finish loading the images
         imageLoadTasks.forEach { key, value in value.cancel() }
     }
