@@ -14,10 +14,10 @@ https://developers.themoviedb.org/3/getting-started/introduction.
 3. Use GitFlow to control the progress of the project.
 4. Implement the app with a design pattern, be it MVP or VIPER.
 5. Handle loading states on the view, after showing the view:
-  a. Charging
-  b. View configuration regarding service response
-  c. Unanswered
-  d. Fail/retry
+  - Charging
+  - View configuration regarding service response
+  - Unanswered
+  - Fail/retry
 6. Include reusable views from a .xib file
 
 **Challenges (Optional)**
