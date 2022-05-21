@@ -1,14 +1,26 @@
 # TheMovieDB
 **iOS Technical Challenge**
 
-For this test, you will use the REST services of this API: https://api.thecatapi.com
+Develop an application capable of querying the API information:
+https://developers.themoviedb.org/3/getting-started/introduction. 
 
-The first screen should have a voting style by race, with a like button and a dislike 
-button below the image of the respective race. The result should be saved on the device 
-in the way that the programmer want, to then show the saved records with date, name and 
-voting type (Like, Dislike).
+**Allowing:**
+- Information display of the most popular movies on the TMDb server.
+- Access the detail of the movie.
 
-Create a screen with the list of cats and that when tapped this would redirect to an 
-internal detail.
+**Goals**
+1. Good use of Object Oriented Programming.
+2. Deliver the project from a public Git repository.
+3. Use GitFlow to control the progress of the project.
+4. Implement the app with a design pattern, be it MVP or VIPER.
+5. Handle loading states on the view, after showing the view:
+  a. Charging
+  b. View configuration regarding service response
+  c. Unanswered
+  d. Fail/retry
+6. Include reusable views from a .xib file
 
-Apply the appropriate architecture.
+**Challenges (Optional)**
+1. Use data persistence with Core Data.
+2. Implement a search engine.
+3. Implement unit tests throughout the app.
