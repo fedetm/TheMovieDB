@@ -5,7 +5,7 @@ Develop an iOS application capable of querying the API information:
 https://developers.themoviedb.org/3/getting-started/introduction. 
 
 **Allowing:**
-- Information display of the most popular movies on the TMDb server.
+- Display the information of the most popular movies on the TMDb server.
 - Access the detail of the movie.
 
 **Goals**
