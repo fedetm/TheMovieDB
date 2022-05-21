@@ -1,7 +1,7 @@
 # TheMovieDB
 **iOS Technical Challenge**
 
-Develop an application capable of querying the API information:
+Develop an iOS application capable of querying the API information:
 https://developers.themoviedb.org/3/getting-started/introduction. 
 
 **Allowing:**
